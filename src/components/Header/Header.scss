@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  align-items: center;
+
+  &_profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 80px;
+  }
+
+  &_element {
+    display: inline-block;
+    margin-right: 100px;
+
+    &__value {
+      font-size: 24px;
+      padding-top: 8px;
+    }
+  }
+}
