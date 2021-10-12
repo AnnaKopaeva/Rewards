@@ -11,6 +11,11 @@
 # production
 /build
 
+# Visual Studo, JetBrains cache/options directory
+.vs/
+.vscode/
+.idea/
+
 # misc
 .DS_Store
 .env.local
