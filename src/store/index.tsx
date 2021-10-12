@@ -1,9 +1,15 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import createSagaMiddleware from "redux-saga";
 
-import mainSlice from "./reducers";
+import reducer from "./rootReducer";
+import saga from "./rootSaga";
 
-export default configureStore({
-	reducer: {
-		main: mainSlice,
-	},
+const sagaMiddleware = createSagaMiddleware();
+
+const store = configureStore({
+  reducer,
+  middleware: [...getDefaultMiddleware({ thunk: false }), sagaMiddleware],
 });
+sagaMiddleware.run(saga);
+
+export default store;
