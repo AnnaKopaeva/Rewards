@@ -8,6 +8,8 @@ import "./Autocomplete.scss";
 
 interface AutocompleteProps<T> {
   data: T[];
+  value: T;
+  onChange(value: T): void;
 }
 
 function Autocomplete<T extends { id: number; name: string }>(
@@ -15,9 +17,9 @@ function Autocomplete<T extends { id: number; name: string }>(
 ): JSX.Element {
   const listRef = React.useRef(null);
 
-  const { data } = props;
+  const { data, value, onChange } = props;
 
-  const [inputValue, setInputValue] = React.useState("");
+  const [inputValue, setInputValue] = React.useState(value?.name);
   const [filteredData, setFilteredData] = React.useState(data);
 
   const [isShowSuggestions, toggleIsShowSuggestions] = React.useState(false);
@@ -28,12 +30,12 @@ function Autocomplete<T extends { id: number; name: string }>(
     toggleIsShowSuggestions(true);
   };
 
-  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setInputValue(value);
+  const onChangeHandle = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value: _value } = event.target;
+    setInputValue(_value);
 
     const filteredSuggestions = data.filter((item) =>
-      item.name.toLowerCase().includes(value.toLowerCase())
+      item.name.toLowerCase().includes(_value.toLowerCase())
     );
 
     setFilteredData(filteredSuggestions);
@@ -41,13 +43,19 @@ function Autocomplete<T extends { id: number; name: string }>(
   };
 
   const onSelectSuggestion = (index: number) => {
+    onChange(filteredData[index]);
     setInputValue(filteredData[index].name);
     toggleIsShowSuggestions(false);
   };
 
   return (
     <div className="suggestions">
-      <Input placeholder="Name Surname" value={inputValue} onChange={onChange} onFocus={onFocus} />
+      <Input
+        placeholder="Name Surname"
+        value={inputValue}
+        onChange={onChangeHandle}
+        onFocus={onFocus}
+      />
       {isShowSuggestions && (
         <ul className="suggestions_list" ref={listRef}>
           {filteredData.map((elem, index) => (

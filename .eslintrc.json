@@ -27,7 +27,7 @@
         "react/jsx-props-no-spreading": "off",
         "no-param-reassign": [2, { "props": false }],
         "no-use-before-define": "off",
-        "no-unused-vars": "warn",
+        "no-unused-vars": "off",
         "no-shadow": "off",
         "no-undef": "off",
         "jsx-a11y/click-events-have-key-events": "off",
