@@ -24,9 +24,15 @@
     "rules": {
         "prettier/prettier": "error",
         "react/jsx-filename-extension": [0, { "extensions": [",.ts", ",.tsx"] }],
+        "react/jsx-props-no-spreading": "off",
         "no-param-reassign": [2, { "props": false }],
         "no-use-before-define": "off",
         "no-unused-vars": "warn",
+        "no-shadow": "off",
+        "no-undef": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": "off",
+        "@typescript-eslint/no-shadow": ["error"],
         "import/prefer-default-export": "off",
         "import/extensions": [
             "error",
