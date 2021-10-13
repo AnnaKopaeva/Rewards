@@ -3,18 +3,20 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ErrorEntity } from "../../interfaces/ErrorEntity";
 import { RewardEntity } from "../../interfaces/RewardEntity";
 
-import rewards from "../../mockedData/rewards";
-
 export interface RewardsStore {
   all: RewardEntity[];
   my: RewardEntity[];
+  myTotal: number;
+  giveTotal: number;
   loading: boolean;
   error: ErrorEntity;
 }
 
 const initialState: RewardsStore = {
-  all: rewards,
+  all: [],
   my: [],
+  myTotal: 0,
+  giveTotal: 0,
   loading: false,
   error: null,
 };
@@ -23,7 +25,7 @@ const rewardsSlice = createSlice({
   name: "rewards",
   initialState,
   reducers: {
-    getRewards: (state: RewardsStore, action) => {
+    getRewards: (state: RewardsStore) => {
       state.loading = true;
     },
     setRewards: (state: RewardsStore, action) => {
@@ -35,19 +37,27 @@ const rewardsSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
-    getMyRewards: (state: RewardsStore, action) => {
-      state.my = action.payload;
+    createRewards: (state: RewardsStore, action) => {
+      state.loading = true;
+    },
+    updateRewards: (state: RewardsStore, action) => {
+      state.all = [...state.all, action.payload];
       state.loading = false;
     },
-    createRewards: (state: RewardsStore, action) => {
-      // state.all = action.payload; // .filter(() => null);
-      // state.my = action.payload; // .filter(() => null);
+    updateMyRewards: (state: RewardsStore, action) => {
+      state.my = [...state.my, action.payload];
       state.loading = false;
     },
   },
 });
 
-export const { getRewards, setRewards, getRewardsFailed, getMyRewards, createRewards } =
-  rewardsSlice.actions;
+export const {
+  getRewards,
+  setRewards,
+  getRewardsFailed,
+  createRewards,
+  updateRewards,
+  updateMyRewards,
+} = rewardsSlice.actions;
 
 export default rewardsSlice.reducer;

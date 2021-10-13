@@ -2,10 +2,15 @@ import { UserEntity } from "./UserEntity";
 
 export interface RewardEntity {
   id: number;
-  userId: number;
-  userById: number;
   time: string;
   message: string;
-  user?: UserEntity;
-  userBy?: UserEntity;
+  reward: number;
+  user: Partial<UserEntity>;
+  userBy: Partial<UserEntity>;
+}
+
+export interface CreateRewardEntity {
+  message: string;
+  reward: string;
+  user: UserEntity;
 }
