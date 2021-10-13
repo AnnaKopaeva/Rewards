@@ -2,14 +2,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100px;
-  height: 100px;
+  flex-shrink: 0;
   border-radius: 50%;
   background-color: #e0e5ec;
   margin-bottom: 8px;
 
-  &__img {
+  &__s {
     width: 40px;
     height: 40px;
+
+    img {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
+  &__sm {
+    width: 100px;
+    height: 100px;
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
   }
 }
