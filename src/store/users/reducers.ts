@@ -1,12 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { UserEntity } from "../../interfaces/UserEntity";
+import { ErrorEntity } from "../../interfaces/ErrorEntity";
+
 export interface UsersStore {
-  data: any[];
+  profile: UserEntity;
+  data: UserEntity[];
   loading: boolean;
-  error: any;
+  error: ErrorEntity;
 }
 
 const initialState: UsersStore = {
+  profile: null,
   data: [],
   loading: false,
   error: null,
@@ -21,6 +26,7 @@ const userSlice = createSlice({
     },
     setUsers: (state: UsersStore, action) => {
       state.data = action.payload;
+      [state.profile] = action.payload;
       state.loading = false;
       state.error = null;
     },
