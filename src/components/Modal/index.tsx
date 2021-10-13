@@ -1,26 +1,44 @@
 import React from "react";
 import { createPortal } from "react-dom";
+import clsx from "clsx";
+
+import clickAwayListener from "../../hooks/clickAwayListener";
 
 import "./Modal.scss";
 
 interface ModalProps {
-  message: string;
   isOpen: boolean;
+  successBtn?: string;
+  className?: string;
   onClose(): void;
 }
 
-const Modal: React.FC<ModalProps> = ({ message, isOpen, onClose }) => {
+const defaultProps = {
+  successBtn: "Close",
+  className: "",
+};
+
+const Modal: React.FC<ModalProps> = ({ successBtn, children, isOpen, className, onClose }) => {
   if (!isOpen) return null;
 
+  const modalRef = React.useRef(null);
+
+  clickAwayListener(modalRef, () => onClose());
+
   return createPortal(
-    <div className="modal">
-      <span>{message}</span>
-      <button type="button" onClick={onClose}>
-        Close
+    <div className="modal" ref={modalRef}>
+      <button type="button" onClick={onClose} className="modal__close_btn">
+        +
+      </button>
+      {children}
+      <button type="button" onClick={onClose} className={clsx("modal__btn", className)}>
+        {successBtn}
       </button>
     </div>,
     document.body
   );
 };
+
+Modal.defaultProps = defaultProps;
 
 export default Modal;
