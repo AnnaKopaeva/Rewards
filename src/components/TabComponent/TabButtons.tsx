@@ -4,24 +4,23 @@ import "./Tabs.scss";
 import clsx from "clsx";
 
 interface TabButtonsProps {
-  buttons: string[];
+  tabsList: string[];
   activeTab: string;
-  changeTab(button: string): void;
+  changeTab(tab: string): void;
 }
 
-const TabButtons: React.FC<TabButtonsProps> = ({ buttons, changeTab, activeTab }) => (
+const TabButtons: React.FC<TabButtonsProps> = ({ tabsList, changeTab, activeTab }) => (
   <>
-    {buttons.map((button: string) => {
-      return (
-        <button
-          type="button"
-          className={clsx("tab_button", { tab_button__active: button === activeTab })}
-          onClick={() => changeTab(button)}
-        >
-          {button}
-        </button>
-      );
-    })}
+    {tabsList.map((tab: string) => (
+      <button
+        key={tab}
+        type="button"
+        className={clsx("tab_button", { tab_button__active: tab === activeTab })}
+        onClick={() => changeTab(tab)}
+      >
+        {tab}
+      </button>
+    ))}
   </>
 );
 
