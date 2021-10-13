@@ -9,25 +9,25 @@ interface TabsProps {
 }
 
 const Tabs: React.FC<TabsProps> = ({ children }) => {
-  const [activeTab, setActiveTab] = React.useState(children[0].props.label);
+  const [activeTab, setActiveTab] = React.useState(children[0]?.props.label);
 
   const changeTab = (tab: string) => {
     setActiveTab(tab);
   };
 
   let content;
-  const buttons: string[] = [];
+  const tabsList: string[] = [];
 
   return (
     <div>
       {React.Children.map(children, (child: React.ReactElement) => {
-        buttons.push(child.props.label);
+        tabsList.push(child.props.label);
         if (child.props.label === activeTab) {
           content = child.props.children;
         }
       })}
 
-      <TabButtons activeTab={activeTab} buttons={buttons} changeTab={changeTab} />
+      <TabButtons activeTab={activeTab} tabsList={tabsList} changeTab={changeTab} />
       <div className="tab_content">{content}</div>
     </div>
   );
