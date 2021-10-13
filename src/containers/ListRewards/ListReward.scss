@@ -1,6 +1,8 @@
+@import "../../variables";
+
 .list {
-  background-color: #f7f9fa;
-  border-top: 1px solid #a1abb8;
+  background-color: $color-white-2;
+  border-top: 1px solid $color-gray;
   position: relative;
   padding-top: 20px;
   margin-top: 10px;
@@ -35,9 +37,9 @@
     width: 60px;
     height: 60px;
     font-size: 36px;
-    background-color: #fff;
+    background-color: $color-white;
     border-radius: 50%;
-    border: 1px solid #c5ced8;
+    border: 1px solid $color-gray-2;
     cursor: pointer;
     position: absolute;
     top: -30px;

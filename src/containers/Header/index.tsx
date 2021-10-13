@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
-import Avatar from "../Avatar";
+import Avatar from "../../components/Avatar";
 import { getUserProfileSelector } from "../../store/users/selectors";
 import {
   getMyRewardsTotalSelector,

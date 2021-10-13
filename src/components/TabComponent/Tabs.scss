@@ -1,3 +1,5 @@
+@import "../../variables";
+
 .tab_button {
   margin-right: 15px;
   font-size: 20px;
@@ -11,7 +13,7 @@
   border-bottom: 2px solid transparent;
 
   &__active {
-    border-bottom: 2px solid #6259f0;
-    color: #6259f0;
+    border-bottom: 2px solid $color-violet;
+    color: $color-violet;
   }
 }

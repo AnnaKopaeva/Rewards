@@ -1,10 +1,12 @@
+@import "../../variables";
+
 .avatar {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
   border-radius: 50%;
-  background-color: #e0e5ec;
+  background-color: $color-gray-4;
   margin-bottom: 8px;
 
   &__s {
