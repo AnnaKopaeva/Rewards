@@ -3,11 +3,17 @@ import { useSelector } from "react-redux";
 
 import Avatar from "../Avatar";
 import { getUserProfileSelector } from "../../store/users/selectors";
+import {
+  getMyRewardsTotalSelector,
+  getGiveRewardsTotalSelector,
+} from "../../store/rewards/selectors";
 
 import "./Header.scss";
 
 const Header = () => {
   const profile = useSelector(getUserProfileSelector);
+  const myRewards = useSelector(getMyRewardsTotalSelector);
+  const giveRewards = useSelector(getGiveRewardsTotalSelector);
 
   return (
     <div className="header">
@@ -18,11 +24,11 @@ const Header = () => {
       <>
         <div className="header_element">
           My Rewards
-          <div className="header_element__value">250$</div>
+          <div className="header_element__value">{myRewards}$</div>
         </div>
         <div className="header_element">
           Give
-          <div className="header_element__value">100$</div>
+          <div className="header_element__value">{giveRewards}$</div>
         </div>
       </>
     </div>

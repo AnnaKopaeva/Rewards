@@ -3,24 +3,40 @@ import { put, select } from "redux-saga/effects";
 import { getUserProfileSelector } from "../users/selectors";
 import rewards from "../../mockedData/rewards";
 
-import { getRewards, setRewards, getRewardsFailed } from "./reducers";
+import {
+  setRewards,
+  getRewardsFailed,
+  createRewards,
+  updateRewards,
+  updateMyRewards,
+} from "./reducers";
 import { UserEntity } from "../../interfaces/UserEntity";
 
-const findUser = (data: UserEntity[], userId: number) => data.find((user) => user.id === userId);
-
-export function* getRewardsSaga(action: ReturnType<typeof getRewards>) {
+export function* getRewardsSaga() {
   try {
-    const data: UserEntity[] = action.payload;
+    const profile: UserEntity = yield select(getUserProfileSelector);
+    const myRewards = rewards.filter((el) => el.user.id === profile.id);
+
+    yield put(setRewards({ all: rewards, my: myRewards }));
+  } catch (e) {
+    yield put(getRewardsFailed(e));
+  }
+}
+
+export function* createRewardsSaga(action: ReturnType<typeof createRewards>) {
+  try {
+    const data = action.payload;
     const profile: UserEntity = yield select(getUserProfileSelector);
 
-    const result = rewards.map((reward) => ({
-      ...reward,
-      user: findUser(data, reward.userId),
-      userBy: findUser(data, reward.userById),
-    }));
-    const myRewards = result.filter((el) => el.userId === profile.id);
+    const id = Date.now();
+    const time = new Date().toLocaleString();
+    const result = { ...data, id, time, userBy: profile };
 
-    yield put(setRewards({ all: result, my: myRewards }));
+    yield put(updateRewards(result));
+
+    if (data.user.id === profile.id) {
+      yield put(updateMyRewards(result));
+    }
   } catch (e) {
     yield put(getRewardsFailed(e));
   }

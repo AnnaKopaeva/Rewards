@@ -11,7 +11,7 @@ export function* fetchDataSaga() {
   try {
     const result: AxiosResponse = yield call(() => callAPI({ url: config.baseApiUrl }));
     yield put(setUsers(result.data));
-    yield put(getRewards(result.data));
+    yield put(getRewards());
   } catch (e) {
     yield put(getUsersFailed(e));
   }
