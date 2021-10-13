@@ -1,8 +1,8 @@
 import * as React from "react";
 
-import Feed from "./components/Feed";
-import Header from "./components/Header";
-import RewardModal from "./components/RewardModal";
+import Feed from "./containers/Feed";
+import Header from "./containers/Header";
+import RewardModal from "./containers/RewardModal";
 
 import "./styles.scss";
 

@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Modal from "../Modal";
-import Autocomplete from "../Autocomplete";
-import Input from "../Input";
+import Modal from "../../components/Modal";
+import Autocomplete from "../../components/Autocomplete";
+import Input from "../../components/Input";
 
 import { getUsersDataSelector } from "../../store/users/selectors";
 import { createRewards } from "../../store/rewards/reducers";
@@ -73,7 +73,7 @@ const RewardModal: React.FC<RewardModalProps> = ({ open, handleCloseModal }) => 
             rows={4}
           />
         </div>
-        <button type="submit" className="modal__btn">
+        <button type="submit" className="modal__btn" disabled={!data.user || !data.reward}>
           Reward
         </button>
       </form>

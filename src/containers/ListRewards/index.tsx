@@ -1,6 +1,6 @@
 import React from "react";
 
-import Avatar, { SIZE } from "../Avatar";
+import Avatar, { SIZE } from "../../components/Avatar";
 import { RewardEntity } from "../../interfaces/RewardEntity";
 
 import "./ListReward.scss";

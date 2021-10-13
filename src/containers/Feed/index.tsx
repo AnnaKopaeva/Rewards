@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import Tabs from "./TabComponent/Tabs";
-import Tab from "./TabComponent/Tab";
+import Tabs from "../../components/TabComponent/Tabs";
+import Tab from "../../components/TabComponent/Tab";
 
-import { getUsers } from "../store/users/reducers";
-import { getAllRewardsSelector, getMyRewardsSelector } from "../store/rewards/selectors";
+import { getUsers } from "../../store/users/reducers";
+import { getAllRewardsSelector, getMyRewardsSelector } from "../../store/rewards/selectors";
 
-import ListRewards from "./ListRewards";
+import ListRewards from "../ListRewards";
 
 interface FeedProps {
   handleOpenModal(): void;
