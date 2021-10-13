@@ -7,6 +7,11 @@
   padding-top: 20px;
   margin-top: 10px;
 
+  &__scrollable {
+    height: calc(100vh - 400px);
+    overflow-y: auto;
+  }
+
   &_elem {
     display: flex;
     margin: 20px 40px;
