@@ -9,6 +9,7 @@
   height: calc(100vh - 400px);
 
   &__scrollable {
+    height: 96%;
     overflow-y: auto;
   }
 
