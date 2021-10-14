@@ -1,8 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, RefObject } from "react";
 
-const clickAwayListener = (ref: any, callback: () => void) => {
+const clickAwayListener = (ref: RefObject<any>, callback: () => void) => {
   useEffect(() => {
-    const handleClickAway = (event: any) => {
+    const handleClickAway = (event: Event) => {
       if (ref.current && !ref.current.contains(event.target)) {
         callback();
       }

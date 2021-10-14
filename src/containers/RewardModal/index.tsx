@@ -55,10 +55,7 @@ const RewardModal: React.FC<RewardModalProps> = ({ open, handleCloseModal }) => 
                 name="user"
                 data={users}
                 value={values.user}
-                onChange={(value) => {
-                  console.log("value", value);
-                  return setFieldValue("user", value);
-                }}
+                onChange={(value) => setFieldValue("user", value)}
               />
               <ErrorMessage name="user" component="span" className="modal_field__error" />
             </div>

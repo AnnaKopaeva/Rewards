@@ -24,13 +24,13 @@ const userSlice = createSlice({
     getUsers: (state: UsersStore) => {
       state.loading = true;
     },
-    setUsers: (state: UsersStore, action) => {
+    setUsers: (state: UsersStore, action: { payload: UserEntity[] }) => {
       state.data = action.payload;
       [state.profile] = action.payload;
       state.loading = false;
       state.error = null;
     },
-    getUsersFailed: (state: UsersStore, action) => {
+    getUsersFailed: (state: UsersStore, action: { payload: ErrorEntity }) => {
       state.loading = false;
       state.error = action.payload;
     },
