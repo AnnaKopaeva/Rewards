@@ -1,10 +1,12 @@
 import * as React from "react";
+import { Formik, FormikProps, ErrorMessage } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 
 import Modal from "../../components/Modal";
 import Autocomplete from "../../components/Autocomplete";
 import Input from "../../components/Input";
 
+import { RewardSchema } from "./validation";
 import { getUsersDataSelector } from "../../store/users/selectors";
 import { createRewards } from "../../store/rewards/reducers";
 import { CreateRewardEntity } from "../../interfaces/RewardEntity";
@@ -26,57 +28,67 @@ export const initialReward: CreateRewardEntity = {
 const RewardModal: React.FC<RewardModalProps> = ({ open, handleCloseModal }) => {
   const dispatch = useDispatch();
 
-  const [data, setData] = React.useState(initialReward);
-
   const users = useSelector(getUsersDataSelector);
 
-  const onChange = (
-    event: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>,
-    name: string
-  ) => {
-    const { value } = event.target;
-    setData({ ...data, [name]: value });
-  };
-
-  const onClose = () => {
-    setData(initialReward);
+  const onSubmit = (values: CreateRewardEntity) => {
+    dispatch(createRewards(values));
     handleCloseModal();
   };
 
-  const handleSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault();
-    dispatch(createRewards(data));
-    onClose();
-  };
-
   return (
-    <Modal isOpen={open} onClose={onClose}>
-      <form onSubmit={handleSubmit} className="modal_form">
-        <div className="modal_field">
-          <span className="modal_field__label">To</span>
-          <Autocomplete<UserEntity>
-            data={users}
-            value={data.user}
-            onChange={(value) => setData({ ...data, user: value })}
-          />
-        </div>
-        <div className="modal_field">
-          <span className="modal_field__label">Reward</span>
-          <Input value={data.reward} placeholder="$" onChange={(e) => onChange(e, "reward")} />
-        </div>
-        <div className="modal_field">
-          <span className="modal_field__label">Why?</span>
-          <textarea
-            value={data.message}
-            onChange={(e) => onChange(e, "message")}
-            className="input"
-            rows={4}
-          />
-        </div>
-        <button type="submit" className="modal__btn" disabled={!data.user || !data.reward}>
-          Reward
-        </button>
-      </form>
+    <Modal isOpen={open} onClose={handleCloseModal}>
+      <Formik
+        initialValues={initialReward}
+        validationSchema={RewardSchema}
+        onSubmit={(values) => onSubmit(values)}
+      >
+        {({
+          values,
+          setFieldValue,
+          handleChange,
+          handleSubmit,
+        }: FormikProps<CreateRewardEntity>) => (
+          <form onSubmit={handleSubmit} className="modal_form">
+            <div className="modal_field">
+              <span className="modal_field__label">To</span>
+              <Autocomplete<UserEntity>
+                name="user"
+                data={users}
+                value={values.user}
+                onChange={(value) => {
+                  console.log("value", value);
+                  return setFieldValue("user", value);
+                }}
+              />
+              <ErrorMessage name="user" component="span" className="modal_field__error" />
+            </div>
+            <div className="modal_field">
+              <span className="modal_field__label">Reward</span>
+              <Input
+                name="reward"
+                type="number"
+                value={values.reward}
+                placeholder="$"
+                onChange={handleChange}
+              />
+              <ErrorMessage name="reward" component="span" className="modal_field__error" />
+            </div>
+            <div className="modal_field">
+              <span className="modal_field__label">Why?</span>
+              <textarea
+                name="message"
+                rows={4}
+                value={values.message}
+                className="input"
+                onChange={handleChange}
+              />
+            </div>
+            <button type="submit" className="modal__btn">
+              Reward
+            </button>
+          </form>
+        )}
+      </Formik>
     </Modal>
   );
 };

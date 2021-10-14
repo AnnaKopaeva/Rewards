@@ -8,6 +8,7 @@ import "./Autocomplete.scss";
 
 interface AutocompleteProps<T> {
   data: T[];
+  name: string;
   value: T;
   onChange(value: T): void;
 }
@@ -17,7 +18,7 @@ function Autocomplete<T extends { id: number; name: string }>(
 ): JSX.Element {
   const listRef = React.useRef(null);
 
-  const { data, value, onChange } = props;
+  const { data, value, name, onChange } = props;
 
   const [inputValue, setInputValue] = React.useState(value?.name);
   const [filteredData, setFilteredData] = React.useState(data);
@@ -51,6 +52,7 @@ function Autocomplete<T extends { id: number; name: string }>(
   return (
     <div className="suggestions">
       <Input
+        name={name}
         placeholder="Name Surname"
         value={inputValue}
         onChange={onChangeHandle}
