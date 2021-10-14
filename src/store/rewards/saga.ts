@@ -2,6 +2,7 @@ import { put, select } from "redux-saga/effects";
 
 import { getUserProfileSelector } from "../users/selectors";
 import rewards from "../../mockedData/rewards";
+import { UserEntity } from "../../interfaces/UserEntity";
 
 import {
   setRewards,
@@ -10,7 +11,6 @@ import {
   updateRewards,
   updateMyRewards,
 } from "./reducers";
-import { UserEntity } from "../../interfaces/UserEntity";
 
 export function* getRewardsSaga() {
   try {
@@ -30,11 +30,12 @@ export function* createRewardsSaga(action: ReturnType<typeof createRewards>) {
 
     const id = Date.now();
     const time = new Date().toLocaleString();
-    const result = { ...data, id, time, userBy: profile };
+    const result = { ...data, reward: +data.reward, id, time, userBy: profile };
 
     yield put(updateRewards(result));
 
     if (data.user.id === profile.id) {
+      // when rewards create for current user, update my rewards
       yield put(updateMyRewards(result));
     }
   } catch (e) {
