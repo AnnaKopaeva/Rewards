@@ -3,6 +3,8 @@ import * as React from "react";
 import "./Input.scss";
 
 interface InputProps {
+  type?: string;
+  name?: string;
   value?: string;
   placeholder?: string;
   onChange?(event: React.ChangeEvent<HTMLInputElement>): void;
@@ -10,6 +12,8 @@ interface InputProps {
 }
 
 const defaultProps = {
+  type: "text",
+  name: "",
   value: "",
   placeholder: "",
   onChange: () => {
@@ -30,7 +34,6 @@ const Input: React.FC<InputProps> = (props) => {
 
   return (
     <input
-      type="text"
       value={inputValue}
       className="input"
       {...props}
