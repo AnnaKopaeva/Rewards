@@ -6,9 +6,9 @@
   position: relative;
   padding-top: 20px;
   margin-top: 10px;
+  height: calc(100vh - 400px);
 
   &__scrollable {
-    height: calc(100vh - 400px);
     overflow-y: auto;
   }
 
