@@ -13,6 +13,10 @@ const getTotalSum = (data: RewardEntity[]) =>
 
 export const getAllRewardsSelector = createSelector(getRewardsSelector, (rewards) => rewards.all);
 export const getMyRewardsSelector = createSelector(getRewardsSelector, (rewards) => rewards.my);
+export const getRewardsLoadingSelector = createSelector(
+  getRewardsSelector,
+  (rewards) => rewards.loading
+);
 export const getMyRewardsTotalSelector = createSelector(getRewardsSelector, (rewards) =>
   getTotalSum(rewards.my)
 );

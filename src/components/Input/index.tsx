@@ -34,6 +34,7 @@ const Input: React.FC<InputProps> = (props) => {
 
   return (
     <input
+      autoComplete="off"
       value={inputValue}
       className="input"
       {...props}
