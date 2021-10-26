@@ -1,7 +1,8 @@
 import React from "react";
 
-import "./Tabs.scss";
-import clsx from "clsx";
+import Button from "@mui/material/Button";
+
+import { tabStyle, activeTabStyle } from "./Tabs.styles";
 
 interface TabButtonsProps {
   tabsList: string[];
@@ -12,14 +13,14 @@ interface TabButtonsProps {
 const TabButtons: React.FC<TabButtonsProps> = ({ tabsList, changeTab, activeTab }) => (
   <>
     {tabsList.map((tab: string) => (
-      <button
+      <Button
         key={tab}
         type="button"
-        className={clsx("tab_button", { tab_button__active: tab === activeTab })}
+        sx={tab === activeTab ? { ...tabStyle, ...activeTabStyle } : tabStyle}
         onClick={() => changeTab(tab)}
       >
         {tab}
-      </button>
+      </Button>
     ))}
   </>
 );
