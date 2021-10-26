@@ -1,31 +1,20 @@
 import React from "react";
-import { createPortal } from "react-dom";
 
-import clickAwayListener from "../../hooks/clickAwayListener";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 
-import "./Modal.scss";
+import { style } from "./Modal.styles";
 
 interface ModalProps {
   isOpen: boolean;
+  children: React.ReactElement;
   onClose(): void;
 }
 
-const Modal: React.FC<ModalProps> = ({ children, isOpen, onClose }) => {
-  if (!isOpen) return null;
+const ModalComponent: React.FC<ModalProps> = ({ children, isOpen, onClose }) => (
+  <Modal open={isOpen} onClose={onClose}>
+    <Box sx={{ position: "absolute", ...style }}>{children}</Box>
+  </Modal>
+);
 
-  const modalRef = React.useRef(null);
-
-  clickAwayListener(modalRef, () => onClose());
-
-  return createPortal(
-    <div className="modal" ref={modalRef}>
-      <button type="button" onClick={onClose} className="modal__close_btn">
-        +
-      </button>
-      {children}
-    </div>,
-    document.body
-  );
-};
-
-export default Modal;
+export default ModalComponent;
