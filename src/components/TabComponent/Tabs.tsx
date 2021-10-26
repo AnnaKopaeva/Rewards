@@ -2,7 +2,7 @@ import React from "react";
 
 import TabButtons from "./TabButtons";
 
-import "./Tabs.scss";
+import "./Tabs.styles";
 
 interface TabsProps {
   children: React.ReactElement[];
@@ -19,7 +19,7 @@ const Tabs: React.FC<TabsProps> = ({ children }) => {
   const tabsList: string[] = [];
 
   return (
-    <div>
+    <>
       {React.Children.map(children, (child: React.ReactElement) => {
         tabsList.push(child.props.label);
         if (child.props.label === activeTab) {
@@ -29,7 +29,7 @@ const Tabs: React.FC<TabsProps> = ({ children }) => {
 
       <TabButtons activeTab={activeTab} tabsList={tabsList} changeTab={changeTab} />
       <div className="tab_content">{content}</div>
-    </div>
+    </>
   );
 };
 
