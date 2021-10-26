@@ -1,18 +1,17 @@
 import * as React from "react";
-import { Formik, FormikProps, ErrorMessage } from "formik";
+import { Formik, Field, FormikProps } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 
+import TextField from "@mui/material/TextField";
+
 import Modal from "../../components/Modal";
-import Autocomplete from "../../components/Autocomplete";
-import Input from "../../components/Input";
+import Autocomplete, { FormFieldProps } from "../../components/Autocomplete";
+import { CustomButton, CustomBox } from "./RewardModal.styles";
 
 import { RewardSchema } from "./validation";
 import { getUsersDataSelector } from "../../store/users/selectors";
 import { createRewards } from "../../store/rewards/reducers";
 import { CreateRewardEntity } from "../../interfaces/RewardEntity";
-import { UserEntity } from "../../interfaces/UserEntity";
-
-import "./RewardModal.scss";
 
 interface RewardModalProps {
   open: boolean;
@@ -44,45 +43,52 @@ const RewardModal: React.FC<RewardModalProps> = ({ open, handleCloseModal }) => 
       >
         {({
           values,
-          setFieldValue,
+          touched,
+          errors,
           handleChange,
           handleSubmit,
         }: FormikProps<CreateRewardEntity>) => (
-          <form onSubmit={handleSubmit} className="modal_form">
-            <div className="modal_field">
-              <span className="modal_field__label">To</span>
-              <Autocomplete<UserEntity>
+          <form onSubmit={handleSubmit}>
+            <CustomBox>
+              <Field
                 name="user"
-                data={users}
-                value={values.user}
-                onChange={(value) => setFieldValue("user", value)}
+                component={(props: FormFieldProps) => (
+                  <Autocomplete
+                    {...props}
+                    options={users}
+                    textFieldProps={{
+                      label: "To",
+                      helperText: touched.user && errors.user,
+                      error: Boolean(touched.user && errors.user),
+                    }}
+                  />
+                )}
               />
-              <ErrorMessage name="user" component="span" className="modal_field__error" />
-            </div>
-            <div className="modal_field">
-              <span className="modal_field__label">Reward</span>
-              <Input
+              <TextField
                 name="reward"
                 type="number"
+                label="Reward"
+                fullWidth
+                margin="normal"
                 value={values.reward}
-                placeholder="$"
+                helperText={touched.reward && errors.reward}
+                error={Boolean(touched.reward && errors.reward)}
                 onChange={handleChange}
               />
-              <ErrorMessage name="reward" component="span" className="modal_field__error" />
-            </div>
-            <div className="modal_field">
-              <span className="modal_field__label">Why?</span>
-              <textarea
+              <TextField
                 name="message"
+                multiline
                 rows={4}
+                label="Why?"
+                fullWidth
+                margin="normal"
                 value={values.message}
-                className="input"
                 onChange={handleChange}
               />
-            </div>
-            <button type="submit" className="modal__btn">
-              Reward
-            </button>
+              <CustomButton color="primary" type="submit" variant="contained">
+                Reward
+              </CustomButton>
+            </CustomBox>
           </form>
         )}
       </Formik>
