@@ -1,29 +1,16 @@
 import * as React from "react";
 
-import "./Avatar.scss";
-import clsx from "clsx";
+import Avatar, { AvatarProps } from "@mui/material/Avatar";
 
 import User from "./user.svg";
 
-export enum SIZE {
-  s = "s",
-  sm = "sm",
-}
-
-interface AvatarProps {
-  size?: SIZE;
-}
-
-const defaultProps = {
-  size: SIZE.sm,
+const styles = {
+  bgcolor: "grey.A200",
+  padding: "20px",
 };
 
-const Avatar: React.FC<AvatarProps> = ({ size }) => (
-  <div className={clsx("avatar", `avatar__${size}`)}>
-    <img src={User} alt="avatar" />
-  </div>
+const AvatarComponent: React.FC<AvatarProps> = ({ sx }) => (
+  <Avatar sx={{ ...sx, ...styles }} src={User} />
 );
 
-Avatar.defaultProps = defaultProps;
-
-export default Avatar;
+export default AvatarComponent;

@@ -1,16 +1,20 @@
 import * as React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
+import Box from "@mui/material/Box";
 
 import useToggleModal from "./hooks/useToggleModal";
 import Feed from "./containers/Feed";
 import Header from "./containers/Header";
 import RewardModal from "./containers/RewardModal";
-import Preloader from "./components/Preloader";
 
-import { getRewardsLoadingSelector } from "./store/rewards/selectors";
 import { getUsers } from "./store/users/reducers";
 
-import "./styles.scss";
+const styles = {
+  width: "60%",
+  maxWidth: "960px",
+  margin: "100px auto 0",
+};
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,19 +24,14 @@ const App = () => {
   }, [dispatch]);
 
   const { open, handleOpenModal, handleCloseModal } = useToggleModal();
-  const isLoading = useSelector(getRewardsLoadingSelector);
 
   return (
     <>
-      {!isLoading ? (
-        <div className="main">
-          <Header />
-          <Feed handleOpenModal={handleOpenModal} />
-          <RewardModal open={open} handleCloseModal={handleCloseModal} />
-        </div>
-      ) : (
-        <Preloader />
-      )}
+      <Box sx={styles}>
+        <Header />
+        <Feed handleOpenModal={handleOpenModal} />
+        <RewardModal open={open} handleCloseModal={handleCloseModal} />
+      </Box>
     </>
   );
 };
