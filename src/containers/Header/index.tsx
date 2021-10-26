@@ -1,6 +1,9 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+
 import Avatar from "../../components/Avatar";
 import { getUserProfileSelector } from "../../store/users/selectors";
 import {
@@ -8,30 +11,34 @@ import {
   getGiveRewardsTotalSelector,
 } from "../../store/rewards/selectors";
 
-import "./Header.scss";
-
 const Header = () => {
   const profile = useSelector(getUserProfileSelector);
   const myRewards = useSelector(getMyRewardsTotalSelector);
   const giveRewards = useSelector(getGiveRewardsTotalSelector);
 
   return (
-    <div className="header">
-      <div className="header_profile">
-        <Avatar />
-        <span>{profile?.name}</span>
-      </div>
+    <Box>
+      <Box>
+        <Avatar sx={{ width: 100, height: 100 }} />
+        <Typography gutterBottom fontSize={16} component="span">
+          {profile?.name}
+        </Typography>
+      </Box>
       <>
-        <div className="header_element">
+        <Typography gutterBottom component="div">
           My Rewards
-          <div className="header_element__value">{myRewards}$</div>
-        </div>
-        <div className="header_element">
+          <Typography gutterBottom component="div">
+            {myRewards}$
+          </Typography>
+        </Typography>
+        <Typography gutterBottom component="div">
           Give
-          <div className="header_element__value">{giveRewards}$</div>
-        </div>
+          <Typography gutterBottom component="div">
+            {giveRewards}$
+          </Typography>
+        </Typography>
       </>
-    </div>
+    </Box>
   );
 };
 
