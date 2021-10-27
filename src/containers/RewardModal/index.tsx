@@ -1,6 +1,6 @@
 import * as React from "react";
 import { Formik, Field, FormikProps } from "formik";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -11,46 +11,34 @@ import Autocomplete, { FormFieldProps } from "../../components/Autocomplete";
 
 import { RewardSchema } from "./validation";
 import { selectUsersData } from "../../store/users/selectors";
-import { createRewards } from "../../store/rewards/reducers";
-import { CreateRewardEntity } from "../../interfaces/RewardEntity";
+import { RewardEntity } from "../../interfaces/RewardEntity";
+import useRewardModal from "./useRewardModal";
 
 import styles from "./RewardModal.styles";
 
 interface RewardModalProps {
   open: boolean;
-  handleCloseModal(): void;
+  onClose(): void;
 }
 
-export const initialReward: CreateRewardEntity = {
-  user: null,
-  reward: "",
-  message: "",
-};
-
-const RewardModal: React.FC<RewardModalProps> = ({ open, handleCloseModal }) => {
-  const dispatch = useDispatch();
-
+const RewardModal: React.FC<RewardModalProps> = ({ open, onClose }) => {
   const users = useSelector(selectUsersData);
 
-  const onSubmit = (values: CreateRewardEntity) => {
-    dispatch(createRewards(values));
-    handleCloseModal();
+  const { initialReward, onSubmit } = useRewardModal();
+
+  const handleFormSubmit = (values: RewardEntity) => {
+    onSubmit(values);
+    onClose();
   };
 
   return (
-    <Modal isOpen={open} onClose={handleCloseModal}>
+    <Modal isOpen={open} onClose={onClose}>
       <Formik
         initialValues={initialReward}
         validationSchema={RewardSchema}
-        onSubmit={(values) => onSubmit(values)}
+        onSubmit={handleFormSubmit}
       >
-        {({
-          values,
-          touched,
-          errors,
-          handleChange,
-          handleSubmit,
-        }: FormikProps<CreateRewardEntity>) => (
+        {({ values, touched, errors, handleChange, handleSubmit }: FormikProps<RewardEntity>) => (
           <form onSubmit={handleSubmit}>
             <Box sx={styles.form}>
               <Field
