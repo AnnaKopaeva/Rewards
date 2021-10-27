@@ -1,4 +1,4 @@
-import { SIZE } from ".";
+import { SIZE } from "../../constants";
 
 const styles = (size: SIZE) => ({
   avatar: {

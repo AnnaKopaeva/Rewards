@@ -6,6 +6,7 @@
     "extends": [
         "plugin:react/recommended",
         "airbnb",
+        "airbnb-typescript",
         "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
@@ -14,7 +15,8 @@
             "jsx": true
         },
         "ecmaVersion": 12,
-        "sourceType": "module"
+        "sourceType": "module",
+        "project": "./tsconfig.json"
     },
     "plugins": [
         "react",
@@ -23,24 +25,13 @@
     ],
     "rules": {
         "prettier/prettier": "error",
-        "react/jsx-filename-extension": [0, { "extensions": [",.ts", ",.tsx"] }],
         "react/jsx-props-no-spreading": "off",
         "react/require-default-props": "off",
         "react/prefer-stateless-function": "off",
         "no-param-reassign": [2, { "props": false }],
-        "no-use-before-define": "off",
+        "@typescript-eslint/no-unused-vars": "off",
         "no-unused-vars": "off",
-        "no-shadow": "off",
-        "no-undef": "off",
-        "jsx-a11y/click-events-have-key-events": "off",
-        "jsx-a11y/no-noninteractive-element-interactions": "off",
-        "@typescript-eslint/no-shadow": ["error"],
-        "import/prefer-default-export": "off",
-        "import/extensions": [
-            "error",
-            "ignorePackages",
-            { "ts": "never", "tsx": "never" }
-        ]
+        "import/prefer-default-export": "off"
     },
     "settings": {
         "import/resolver": {
