@@ -9,7 +9,7 @@ import { RewardsStore } from "./reducers";
 export const selectRewards = (state: AppState) => state.rewards;
 
 const getTotalSum = (data: RewardEntity[]) =>
-  data.reduce((total: number, el) => total + +el.reward, 0);
+  data.reduce((total: number, el) => total + +el.rewardCount, 0);
 
 export const selectAllRewards = createSelector(selectRewards, (rewards) => rewards.all);
 export const selectMyRewards = createSelector(selectRewards, (rewards) => rewards.my);
@@ -21,9 +21,7 @@ export const selectTotalGiveRewards = createSelector(
   selectRewards,
   selectProfileData,
   (rewards: RewardsStore, profile: UserEntity) => {
-    const giveRewards = profile
-      ? rewards.all.filter((el: RewardEntity) => el.userBy.id === profile.id)
-      : [];
+    const giveRewards = rewards.all.filter((el: RewardEntity) => el.userBy.id === profile.id);
     return getTotalSum(giveRewards);
   }
 );

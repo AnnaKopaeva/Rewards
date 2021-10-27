@@ -63,10 +63,10 @@ const RewardModal: React.FC<RewardModalProps> = ({ open, onClose }) => {
                 InputProps={{ placeholder: "Enter rewards" }}
                 fullWidth
                 margin="normal"
-                value={values.reward}
+                value={values.rewardCount}
                 InputLabelProps={{ shrink: true }}
-                helperText={touched.reward && errors.reward}
-                error={Boolean(touched.reward && errors.reward)}
+                helperText={touched.rewardCount && errors.rewardCount}
+                error={Boolean(touched.rewardCount && errors.rewardCount)}
                 onChange={handleChange}
               />
               <TextField

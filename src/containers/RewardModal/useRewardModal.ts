@@ -15,7 +15,8 @@ const useRewardModal = () => {
   const initialReward: RewardEntity = {
     id: Date.now(),
     user: null,
-    reward: "",
+    rewardCount: "",
+    rewardCurrency: "$",
     message: "",
     time: dayjs().unix(),
     userBy: profile,
