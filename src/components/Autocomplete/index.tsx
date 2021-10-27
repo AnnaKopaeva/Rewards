@@ -26,14 +26,20 @@ function FormikAutocomplete<T extends { name: string }>({
   return (
     <Autocomplete
       {...field}
-      {...form}
       options={options}
       fullWidth
       getOptionLabel={(option) => option.name}
       onChange={(_, value) => setFieldValue(name, value)}
       onBlur={() => setTouched({ [name]: true })}
       renderInput={(inputProps) => (
-        <TextField {...inputProps} fullWidth margin="normal" {...textFieldProps} />
+        <TextField
+          {...inputProps}
+          fullWidth
+          margin="normal"
+          InputLabelProps={{ shrink: true }}
+          InputProps={{ ...inputProps.InputProps, placeholder: textFieldProps.placeholder }}
+          {...textFieldProps}
+        />
       )}
     />
   );
