@@ -3,17 +3,14 @@ import React from "react";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
+import styles from "./PanelEmpty.styles";
+
 interface PanelEmptyProps {
   title?: string;
 }
 
-const defaultProps = {
-  title: "No data found",
-  children: "",
-};
-
-const PanelEmpty: React.FC<PanelEmptyProps> = ({ title, children }) => (
-  <Box sx={{ textAlign: "center", padding: "50px 0" }}>
+const PanelEmpty: React.FC<PanelEmptyProps> = ({ title = "No data found", children = "" }) => (
+  <Box sx={styles.panel}>
     <Typography variant="h5" gutterBottom fontSize={20} component="h5">
       {title}
     </Typography>
@@ -22,7 +19,5 @@ const PanelEmpty: React.FC<PanelEmptyProps> = ({ title, children }) => (
     </Typography>
   </Box>
 );
-
-PanelEmpty.defaultProps = defaultProps;
 
 export default PanelEmpty;

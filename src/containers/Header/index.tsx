@@ -4,12 +4,14 @@ import { useSelector } from "react-redux";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import Avatar from "../../components/Avatar";
+import Avatar, { SIZE } from "../../components/Avatar";
 import { getUserProfileSelector } from "../../store/users/selectors";
 import {
   getMyRewardsTotalSelector,
   getGiveRewardsTotalSelector,
 } from "../../store/rewards/selectors";
+
+import styles from "./Header.styles";
 
 const Header = () => {
   const profile = useSelector(getUserProfileSelector);
@@ -17,27 +19,21 @@ const Header = () => {
   const giveRewards = useSelector(getGiveRewardsTotalSelector);
 
   return (
-    <Box>
-      <Box>
-        <Avatar sx={{ width: 100, height: 100 }} />
-        <Typography gutterBottom fontSize={16} component="span">
-          {profile?.name}
-        </Typography>
+    <Box sx={styles.header}>
+      <Box sx={styles.avatar}>
+        <Avatar size={SIZE.m} />
+        <Typography sx={styles.name}>{profile?.name}</Typography>
       </Box>
-      <>
-        <Typography gutterBottom component="div">
-          My Rewards
-          <Typography gutterBottom component="div">
-            {myRewards}$
-          </Typography>
-        </Typography>
-        <Typography gutterBottom component="div">
-          Give
-          <Typography gutterBottom component="div">
-            {giveRewards}$
-          </Typography>
-        </Typography>
-      </>
+      <Box sx={styles.details}>
+        <Box sx={styles.block}>
+          <Typography gutterBottom>My Rewards</Typography>
+          <Typography sx={styles.count}>{myRewards}$</Typography>
+        </Box>
+        <Box>
+          <Typography gutterBottom>Give</Typography>
+          <Typography sx={styles.count}>{giveRewards}$</Typography>
+        </Box>
+      </Box>
     </Box>
   );
 };

@@ -3,7 +3,7 @@ import React from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 
-import { style } from "./Modal.styles";
+import styles from "./Modal.styles";
 
 interface ModalProps {
   isOpen: boolean;
@@ -13,7 +13,7 @@ interface ModalProps {
 
 const ModalComponent: React.FC<ModalProps> = ({ children, isOpen, onClose }) => (
   <Modal open={isOpen} onClose={onClose}>
-    <Box sx={{ position: "absolute", ...style }}>{children}</Box>
+    <Box sx={styles.modal}>{children}</Box>
   </Modal>
 );
 
