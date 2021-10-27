@@ -4,13 +4,7 @@ export interface RewardEntity {
   id: number;
   time: string;
   message: string;
-  reward: number;
+  reward: number | string;
   user: Partial<UserEntity>;
   userBy: Partial<UserEntity>;
-}
-
-export interface CreateRewardEntity {
-  message: string;
-  reward: string;
-  user: UserEntity;
 }

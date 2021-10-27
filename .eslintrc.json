@@ -26,6 +26,7 @@
         "react/jsx-filename-extension": [0, { "extensions": [",.ts", ",.tsx"] }],
         "react/jsx-props-no-spreading": "off",
         "react/require-default-props": "off",
+        "react/prefer-stateless-function": "off",
         "no-param-reassign": [2, { "props": false }],
         "no-use-before-define": "off",
         "no-unused-vars": "off",
