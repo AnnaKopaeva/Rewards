@@ -1,6 +1,6 @@
 import { put, select } from "redux-saga/effects";
 
-import { getUserProfileSelector } from "../users/selectors";
+import { selectUserProfile } from "../users/selectors";
 import rewards from "../../mockedData/rewards";
 import { UserEntity } from "../../interfaces/UserEntity";
 
@@ -14,7 +14,7 @@ import {
 
 export function* getRewardsSaga() {
   try {
-    const profile: UserEntity = yield select(getUserProfileSelector);
+    const profile: UserEntity = yield select(selectUserProfile);
     const myRewards = rewards.filter((el) => el.user.id === profile.id);
 
     yield put(setRewards({ all: rewards, my: myRewards }));
@@ -26,7 +26,7 @@ export function* getRewardsSaga() {
 export function* createRewardsSaga(action: ReturnType<typeof createRewards>) {
   try {
     const data = action.payload;
-    const profile: UserEntity = yield select(getUserProfileSelector);
+    const profile: UserEntity = yield select(selectUserProfile);
 
     const id = Date.now();
     const time = new Date().toLocaleString();

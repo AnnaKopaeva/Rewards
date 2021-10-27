@@ -8,7 +8,7 @@ import ListRewardsBox from "./ListRewardsBox";
 
 import { RewardEntity } from "../../interfaces/RewardEntity";
 
-import { getRewardsLoadingSelector } from "../../store/rewards/selectors";
+import { selectRewardsLoading } from "../../store/rewards/selectors";
 
 import styles from "./ListRewards.styles";
 
@@ -17,7 +17,7 @@ interface ListRewardsProps {
 }
 
 const ListRewards: React.FC<ListRewardsProps> = ({ data }) => {
-  const isLoading = useSelector(getRewardsLoadingSelector);
+  const isLoading = useSelector(selectRewardsLoading);
 
   return (
     <Grid container wrap="nowrap" sx={styles.rewards}>

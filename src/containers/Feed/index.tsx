@@ -8,7 +8,7 @@ import { Add } from "@mui/icons-material";
 import Tabs from "../../components/TabComponent/Tabs";
 import Tab from "../../components/TabComponent/Tab";
 
-import { getAllRewardsSelector, getMyRewardsSelector } from "../../store/rewards/selectors";
+import { selectAllRewards, selectMyRewards } from "../../store/rewards/selectors";
 
 import ListRewards from "../ListRewards";
 
@@ -19,8 +19,8 @@ interface FeedProps {
 }
 
 const Feed: React.FC<FeedProps> = ({ handleOpenModal }) => {
-  const allRewards = useSelector(getAllRewardsSelector);
-  const myRewards = useSelector(getMyRewardsSelector);
+  const allRewards = useSelector(selectAllRewards);
+  const myRewards = useSelector(selectMyRewards);
 
   return (
     <Box sx={styles.feed}>

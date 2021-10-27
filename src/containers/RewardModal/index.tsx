@@ -10,7 +10,7 @@ import Modal from "../../components/Modal";
 import Autocomplete, { FormFieldProps } from "../../components/Autocomplete";
 
 import { RewardSchema } from "./validation";
-import { getUsersDataSelector } from "../../store/users/selectors";
+import { selectUsersData } from "../../store/users/selectors";
 import { createRewards } from "../../store/rewards/reducers";
 import { CreateRewardEntity } from "../../interfaces/RewardEntity";
 
@@ -30,7 +30,7 @@ export const initialReward: CreateRewardEntity = {
 const RewardModal: React.FC<RewardModalProps> = ({ open, handleCloseModal }) => {
   const dispatch = useDispatch();
 
-  const users = useSelector(getUsersDataSelector);
+  const users = useSelector(selectUsersData);
 
   const onSubmit = (values: CreateRewardEntity) => {
     dispatch(createRewards(values));
