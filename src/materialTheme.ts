@@ -1,24 +1,25 @@
 import { createTheme } from "@mui/material/styles";
 
 const colors = {
-  purple: "#6259f0",
+  white: "#FFF",
+  purple: "#6259F0",
   grey: "#E0E5EC",
+  darkGrey: "#A1ABB8",
 };
 
 export const mainTheme = createTheme({
   palette: {
     primary: {
       main: colors.purple,
+      contrastText: colors.white,
     },
     grey: {
       A200: colors.grey,
+      A400: colors.darkGrey,
     },
   },
   typography: {
     fontFamily: [
-      "-apple-system",
-      "BlinkMacSystemFont",
-      '"Segoe UI"',
       "Roboto",
       '"Helvetica Neue"',
       "Arial",
