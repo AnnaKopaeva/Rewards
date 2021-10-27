@@ -4,7 +4,6 @@ import { AppState } from "../rootReducer";
 
 export const selectUsers = (state: AppState) => state.users;
 
-export const selectUserProfile = createSelector(selectUsers, (users) => users.profile);
 export const selectUsersData = createSelector(selectUsers, (users) => users.data);
 export const selectUsersLoading = createSelector(selectUsers, (users) => users.loading);
 export const selectUsersError = createSelector(selectUsers, (users) => users.error);
