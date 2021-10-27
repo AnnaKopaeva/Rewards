@@ -1,17 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+import { fetchUser } from "./actions";
+
 import { UserEntity } from "../../interfaces/UserEntity";
 import { ErrorEntity } from "../../interfaces/ErrorEntity";
 
 export interface UsersStore {
-  profile: UserEntity;
   data: UserEntity[];
   loading: boolean;
   error: ErrorEntity;
 }
 
 const initialState: UsersStore = {
-  profile: null,
   data: [],
   loading: false,
   error: null,
@@ -20,23 +20,19 @@ const initialState: UsersStore = {
 const userSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {
-    getUsers: (state: UsersStore) => {
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchUser.pending, (state) => {
       state.loading = true;
-    },
-    setUsers: (state: UsersStore, action: { payload: UserEntity[] }) => {
-      state.data = action.payload;
-      [state.profile] = action.payload;
+    });
+    builder.addCase(fetchUser.fulfilled, (state, { payload }) => {
       state.loading = false;
-      state.error = null;
-    },
-    getUsersFailed: (state: UsersStore, action: { payload: ErrorEntity }) => {
+      state.data = payload;
+    });
+    builder.addCase(fetchUser.rejected, (state) => {
       state.loading = false;
-      state.error = action.payload;
-    },
+    });
   },
 });
-
-export const { getUsers, setUsers, getUsersFailed } = userSlice.actions;
 
 export default userSlice.reducer;

@@ -1,12 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 import { ErrorEntity } from "../../interfaces/ErrorEntity";
-import { CreateRewardEntity, RewardEntity } from "../../interfaces/RewardEntity";
+import { RewardEntity } from "../../interfaces/RewardEntity";
 
-interface SetRewardsAction {
-  all: RewardEntity[];
-  my: RewardEntity[];
-}
+import { fetchRewards, fetchRewardsByUser } from "./actions";
 
 export interface RewardsStore {
   all: RewardEntity[];
@@ -30,39 +27,37 @@ const rewardsSlice = createSlice({
   name: "rewards",
   initialState,
   reducers: {
-    getRewards: (state: RewardsStore) => {
-      state.loading = true;
-    },
-    setRewards: (state: RewardsStore, action: { payload: SetRewardsAction }) => {
-      state.all = action.payload.all;
-      state.my = action.payload.my;
-      state.loading = false;
-    },
-    getRewardsFailed: (state: RewardsStore, action: { payload: ErrorEntity }) => {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    createRewards: (state: RewardsStore, action: { payload: CreateRewardEntity }) => {
-      state.loading = true;
-    },
-    updateRewards: (state: RewardsStore, action: { payload: RewardEntity }) => {
+    createReward: (state: RewardsStore, action: { payload: RewardEntity }) => {
       state.all = [...state.all, action.payload];
-      state.loading = false;
+      state.my = [...state.all, action.payload].filter(
+        (el) => el.user.id === action.payload.userBy.id
+      );
     },
-    updateMyRewards: (state: RewardsStore, action: { payload: RewardEntity }) => {
-      state.my = [...state.my, action.payload];
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchRewards.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchRewards.fulfilled, (state, { payload }) => {
       state.loading = false;
-    },
+      state.all = payload;
+    });
+    builder.addCase(fetchRewards.rejected, (state) => {
+      state.loading = false;
+    });
+    builder.addCase(fetchRewardsByUser.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchRewardsByUser.fulfilled, (state, { payload }) => {
+      state.loading = false;
+      state.my = payload;
+    });
+    builder.addCase(fetchRewardsByUser.rejected, (state) => {
+      state.loading = false;
+    });
   },
 });
 
-export const {
-  getRewards,
-  setRewards,
-  getRewardsFailed,
-  createRewards,
-  updateRewards,
-  updateMyRewards,
-} = rewardsSlice.actions;
+export const { createReward } = rewardsSlice.actions;
 
 export default rewardsSlice.reducer;

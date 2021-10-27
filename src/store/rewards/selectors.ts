@@ -1,6 +1,6 @@
 import { createSelector } from "reselect";
 
-import { selectUserProfile } from "../users/selectors";
+import { selectProfileData } from "../profile/selectors";
 import { AppState } from "../rootReducer";
 import { UserEntity } from "../../interfaces/UserEntity";
 import { RewardEntity } from "../../interfaces/RewardEntity";
@@ -19,9 +19,11 @@ export const selectTotalMyRewards = createSelector(selectRewards, (rewards) =>
 );
 export const selectTotalGiveRewards = createSelector(
   selectRewards,
-  selectUserProfile,
+  selectProfileData,
   (rewards: RewardsStore, profile: UserEntity) => {
-    const giveRewards = rewards.all.filter((el: RewardEntity) => el.userBy.id === profile.id);
+    const giveRewards = profile
+      ? rewards.all.filter((el: RewardEntity) => el.userBy.id === profile.id)
+      : [];
     return getTotalSum(giveRewards);
   }
 );
