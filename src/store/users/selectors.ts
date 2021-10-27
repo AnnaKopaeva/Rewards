@@ -2,9 +2,9 @@ import { createSelector } from "reselect";
 
 import { AppState } from "../rootReducer";
 
-export const getUsersSelector = (state: AppState) => state.users;
+export const selectUsers = (state: AppState) => state.users;
 
-export const getUserProfileSelector = createSelector(getUsersSelector, (users) => users.profile);
-export const getUsersDataSelector = createSelector(getUsersSelector, (users) => users.data);
-export const getUsersLoadingSelector = createSelector(getUsersSelector, (users) => users.loading);
-export const getUsersErrorSelector = createSelector(getUsersSelector, (users) => users.error);
+export const selectUserProfile = createSelector(selectUsers, (users) => users.profile);
+export const selectUsersData = createSelector(selectUsers, (users) => users.data);
+export const selectUsersLoading = createSelector(selectUsers, (users) => users.loading);
+export const selectUsersError = createSelector(selectUsers, (users) => users.error);

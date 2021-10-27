@@ -5,18 +5,15 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
 import Avatar, { SIZE } from "../../components/Avatar";
-import { getUserProfileSelector } from "../../store/users/selectors";
-import {
-  getMyRewardsTotalSelector,
-  getGiveRewardsTotalSelector,
-} from "../../store/rewards/selectors";
+import { selectUserProfile } from "../../store/users/selectors";
+import { selectTotalMyRewards, selectTotalGiveRewards } from "../../store/rewards/selectors";
 
 import styles from "./Header.styles";
 
 const Header = () => {
-  const profile = useSelector(getUserProfileSelector);
-  const myRewards = useSelector(getMyRewardsTotalSelector);
-  const giveRewards = useSelector(getGiveRewardsTotalSelector);
+  const profile = useSelector(selectUserProfile);
+  const myRewards = useSelector(selectTotalMyRewards);
+  const giveRewards = useSelector(selectTotalGiveRewards);
 
   return (
     <Box sx={styles.header}>
