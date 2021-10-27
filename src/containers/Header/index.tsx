@@ -2,16 +2,17 @@ import * as React from "react";
 import { useSelector } from "react-redux";
 
 import Box from "@mui/material/Box";
+import Skeleton from "@mui/material/Skeleton";
 import Typography from "@mui/material/Typography";
 
 import Avatar, { SIZE } from "../../components/Avatar";
-import { selectUserProfile } from "../../store/users/selectors";
+import { selectProfileData } from "../../store/profile/selectors";
 import { selectTotalMyRewards, selectTotalGiveRewards } from "../../store/rewards/selectors";
 
 import styles from "./Header.styles";
 
 const Header = () => {
-  const profile = useSelector(selectUserProfile);
+  const profile = useSelector(selectProfileData);
   const myRewards = useSelector(selectTotalMyRewards);
   const giveRewards = useSelector(selectTotalGiveRewards);
 
@@ -19,7 +20,11 @@ const Header = () => {
     <Box sx={styles.header}>
       <Box sx={styles.avatar}>
         <Avatar size={SIZE.m} />
-        <Typography sx={styles.name}>{profile?.name}</Typography>
+        {profile ? (
+          <Typography sx={styles.name}>{profile.name}</Typography>
+        ) : (
+          <Skeleton sx={styles.name} />
+        )}
       </Box>
       <Box sx={styles.details}>
         <Box sx={styles.block}>
