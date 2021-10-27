@@ -12,7 +12,7 @@ const rewards: RewardEntity[] = [
       name: "Ervin Howell",
     },
     reward: 100,
-    time: "4 hrs ago",
+    time: 1635348000,
     message: "Big thanks for your help in helping on the outage today!!!",
   },
   {
@@ -26,7 +26,7 @@ const rewards: RewardEntity[] = [
       name: "Patricia Lebsack",
     },
     reward: 150,
-    time: "Feb 1, 2021",
+    time: 1635345010,
     message:
       "Thanks for your help in creating the product overview deck. Your help to show cases those scenarios really helped in closing the loop on the story.",
   },
