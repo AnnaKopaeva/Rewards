@@ -2,8 +2,6 @@ import React from "react";
 
 import TabButtons from "./TabButtons";
 
-import "./Tabs.styles";
-
 interface TabsProps {
   children: React.ReactElement[];
 }
@@ -28,7 +26,7 @@ const Tabs: React.FC<TabsProps> = ({ children }) => {
       })}
 
       <TabButtons activeTab={activeTab} tabsList={tabsList} changeTab={changeTab} />
-      <div className="tab_content">{content}</div>
+      {content}
     </>
   );
 };
