@@ -3,12 +3,8 @@ import * as React from "react";
 import Avatar, { AvatarProps } from "@mui/material/Avatar";
 import { Person } from "@mui/icons-material";
 
+import { SIZE } from "../../constants";
 import styles from "./Avatar.styles";
-
-export enum SIZE {
-  s = "s",
-  m = "m",
-}
 
 interface AvatarComponentProps extends AvatarProps {
   size?: SIZE;
