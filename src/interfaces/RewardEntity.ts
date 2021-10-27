@@ -2,7 +2,7 @@ import { UserEntity } from "./UserEntity";
 
 export interface RewardEntity {
   id: number;
-  time: string;
+  time: number;
   message: string;
   reward: number | string;
   user: Partial<UserEntity>;

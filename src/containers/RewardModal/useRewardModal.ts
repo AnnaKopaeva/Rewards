@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { useDispatch, useSelector } from "react-redux";
 
 import { RewardEntity } from "../../interfaces/RewardEntity";
@@ -16,7 +17,7 @@ const useRewardModal = () => {
     user: null,
     reward: "",
     message: "",
-    time: new Date().toLocaleString(),
+    time: dayjs().unix(),
     userBy: profile,
   };
 
