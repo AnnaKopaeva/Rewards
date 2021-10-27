@@ -3,15 +3,18 @@ import { Formik, Field, FormikProps } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 import Modal from "../../components/Modal";
 import Autocomplete, { FormFieldProps } from "../../components/Autocomplete";
-import { CustomButton, CustomBox } from "./RewardModal.styles";
 
 import { RewardSchema } from "./validation";
 import { getUsersDataSelector } from "../../store/users/selectors";
 import { createRewards } from "../../store/rewards/reducers";
 import { CreateRewardEntity } from "../../interfaces/RewardEntity";
+
+import styles from "./RewardModal.styles";
 
 interface RewardModalProps {
   open: boolean;
@@ -49,7 +52,7 @@ const RewardModal: React.FC<RewardModalProps> = ({ open, handleCloseModal }) => 
           handleSubmit,
         }: FormikProps<CreateRewardEntity>) => (
           <form onSubmit={handleSubmit}>
-            <CustomBox>
+            <Box sx={styles.form}>
               <Field
                 name="user"
                 component={(props: FormFieldProps) => (
@@ -58,6 +61,7 @@ const RewardModal: React.FC<RewardModalProps> = ({ open, handleCloseModal }) => 
                     options={users}
                     textFieldProps={{
                       label: "To",
+                      placeholder: "Select User",
                       helperText: touched.user && errors.user,
                       error: Boolean(touched.user && errors.user),
                     }}
@@ -68,9 +72,11 @@ const RewardModal: React.FC<RewardModalProps> = ({ open, handleCloseModal }) => 
                 name="reward"
                 type="number"
                 label="Reward"
+                InputProps={{ placeholder: "Enter rewards" }}
                 fullWidth
                 margin="normal"
                 value={values.reward}
+                InputLabelProps={{ shrink: true }}
                 helperText={touched.reward && errors.reward}
                 error={Boolean(touched.reward && errors.reward)}
                 onChange={handleChange}
@@ -83,12 +89,13 @@ const RewardModal: React.FC<RewardModalProps> = ({ open, handleCloseModal }) => 
                 fullWidth
                 margin="normal"
                 value={values.message}
+                InputLabelProps={{ shrink: true }}
                 onChange={handleChange}
               />
-              <CustomButton color="primary" type="submit" variant="contained">
+              <Button color="primary" type="submit" variant="contained" sx={styles.btn}>
                 Reward
-              </CustomButton>
-            </CustomBox>
+              </Button>
+            </Box>
           </form>
         )}
       </Formik>
