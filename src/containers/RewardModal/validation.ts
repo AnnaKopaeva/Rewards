@@ -5,5 +5,5 @@ const MAX_ERROR_MESSAGE = `Should be less that ${MAX_LENGTH} symbols`;
 
 export const RewardSchema = Yup.object().shape({
   user: Yup.object().shape({ name: Yup.string() }).required("User is required").nullable(),
-  reward: Yup.string().max(MAX_LENGTH, MAX_ERROR_MESSAGE).required("Reward is required"),
+  rewardCount: Yup.string().max(MAX_LENGTH, MAX_ERROR_MESSAGE).required("Reward is required"),
 });

@@ -57,7 +57,7 @@ const RewardModal: React.FC<RewardModalProps> = ({ open, onClose }) => {
                 )}
               />
               <TextField
-                name="reward"
+                name="rewardCount"
                 type="number"
                 label="Reward"
                 InputProps={{ placeholder: "Enter rewards" }}

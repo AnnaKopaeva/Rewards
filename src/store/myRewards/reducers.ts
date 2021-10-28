@@ -3,42 +3,42 @@ import { createSlice } from "@reduxjs/toolkit";
 import { ErrorEntity } from "../../interfaces/ErrorEntity";
 import { RewardEntity } from "../../interfaces/RewardEntity";
 
-import { fetchRewards } from "./actions";
+import { fetchRewardsByUser } from "./actions";
 
-export interface RewardsStore {
+export interface MyRewardsStore {
   data: RewardEntity[];
   loading: boolean;
   error: ErrorEntity;
 }
 
-const initialState: RewardsStore = {
+const initialState: MyRewardsStore = {
   data: [],
   loading: true,
   error: null,
 };
 
-const rewardsSlice = createSlice({
+const myRewardsSlice = createSlice({
   name: "rewards",
   initialState,
   reducers: {
-    createReward: (state: RewardsStore, action: { payload: RewardEntity }) => {
+    createMyReward: (state: MyRewardsStore, action: { payload: RewardEntity }) => {
       state.data = [...state.data, action.payload];
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchRewards.pending, (state) => {
+    builder.addCase(fetchRewardsByUser.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(fetchRewards.fulfilled, (state, { payload }) => {
+    builder.addCase(fetchRewardsByUser.fulfilled, (state, { payload }) => {
       state.loading = false;
       state.data = payload;
     });
-    builder.addCase(fetchRewards.rejected, (state) => {
+    builder.addCase(fetchRewardsByUser.rejected, (state) => {
       state.loading = false;
     });
   },
 });
 
-export const { createReward } = rewardsSlice.actions;
+export const { createMyReward } = myRewardsSlice.actions;
 
-export default rewardsSlice.reducer;
+export default myRewardsSlice.reducer;
