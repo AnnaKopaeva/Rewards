@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import dayjs from "dayjs";
 import relativeTimePlugin from "dayjs/plugin/relativeTime";
 
