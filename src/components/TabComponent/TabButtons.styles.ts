@@ -5,7 +5,7 @@ const styles = {
     borderBottom: (theme: Theme) => `1px solid ${theme.palette.grey.A400}`,
   },
   tab: {
-    fontSize: "18px",
+    fontSize: "1.2rem",
     fontWeight: 400,
     padding: "5px 20px",
     borderBottom: "2px solid transparent",

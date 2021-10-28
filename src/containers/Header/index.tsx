@@ -1,13 +1,12 @@
 import * as React from "react";
 import { useSelector } from "react-redux";
 
+import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import Currency from "../../components/Currency";
+import Money from "../../components/Money";
 import Profile from "../Profile";
-
-import { CURRENCY } from "../../constants";
 
 import { selectTotalGiveRewards } from "../../store/rewards/selectors";
 import { selectTotalMyRewards } from "../../store/myRewards/selectors";
@@ -19,25 +18,19 @@ const Header = () => {
   const giveRewards = useSelector(selectTotalGiveRewards);
 
   return (
-    <Box sx={styles.header}>
+    <Grid container sx={styles.header}>
       <Profile />
       <Box sx={styles.details}>
         <Box sx={styles.block}>
           <Typography gutterBottom>My Rewards</Typography>
-          <Typography sx={styles.count}>
-            {myRewards}
-            <Currency value={CURRENCY.dollar} />
-          </Typography>
+          <Money value={myRewards} />
         </Box>
         <Box>
           <Typography gutterBottom>Give</Typography>
-          <Typography sx={styles.count}>
-            {giveRewards}
-            <Currency value={CURRENCY.dollar} />
-          </Typography>
+          <Money value={giveRewards} />
         </Box>
       </Box>
-    </Box>
+    </Grid>
   );
 };
 
