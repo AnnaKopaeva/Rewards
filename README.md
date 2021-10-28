@@ -1,31 +1,46 @@
-# Demo 🚀
-
-https://annakopaeva.github.io/rewards/
+# Peer Rewards
 
 ----
 
-# Getting Started with Create React App
+### Table of contents
+* [General info](#general-info)
+* [Demo](#demo)
+* [Technologies](#technologies)
+* [Setup](#setup)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### General info
+This project is a simple peer rewards application that allows employees to receive and assign awards.
 
-## Available Scripts
+### Demo 🚀
+https://annakopaeva.github.io/rewards/
 
-In the project directory, you can run:
+### Technologies
+Project is created with:
+* React version: 17.0.2
+* Typescript version: 4.1.2
+* Redux toolkit version: 1.6.1
+* Material-UI version: 5.0.5
 
-### `yarn start`
+## Setup
+
+`yarn`
+
+Installing all the dependencies.
+
+`yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn build`
+`yarn build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`yarn run deploy`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Generate a production build of app, and deploy it to GitHub Pages.
+
+----
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
