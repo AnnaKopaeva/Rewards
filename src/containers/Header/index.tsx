@@ -9,7 +9,8 @@ import Profile from "../Profile";
 
 import { CURRENCY } from "../../constants";
 
-import { selectTotalMyRewards, selectTotalGiveRewards } from "../../store/rewards/selectors";
+import { selectTotalGiveRewards } from "../../store/rewards/selectors";
+import { selectTotalMyRewards } from "../../store/myRewards/selectors";
 
 import styles from "./Header.styles";
 

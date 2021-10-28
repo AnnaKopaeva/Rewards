@@ -8,8 +8,10 @@ import { Add } from "@mui/icons-material";
 import Tabs from "../../components/TabComponent/Tabs";
 import Tab from "../../components/TabComponent/Tab";
 
-import { fetchRewards, fetchRewardsByUser } from "../../store/rewards/actions";
-import { selectAllRewards, selectMyRewards } from "../../store/rewards/selectors";
+import { fetchRewards } from "../../store/rewards/actions";
+import { fetchRewardsByUser } from "../../store/myRewards/actions";
+import { selectAllRewards } from "../../store/rewards/selectors";
+import { selectMyRewardsData } from "../../store/myRewards/selectors";
 import { selectProfileData } from "../../store/profile/selectors";
 
 import ListRewards from "../ListRewards";
@@ -25,7 +27,9 @@ const Feed: React.FC<FeedProps> = ({ onOpen }) => {
 
   const profile = useSelector(selectProfileData);
   const allRewards = useSelector(selectAllRewards);
-  const myRewards = useSelector(selectMyRewards);
+  const myRewards = useSelector(selectMyRewardsData);
+
+  const { open, handleOpenModal, handleCloseModal } = useToggleModal();
 
   useEffect(() => {
     dispatch(fetchRewards());

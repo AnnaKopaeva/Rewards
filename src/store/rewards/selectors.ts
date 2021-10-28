@@ -11,17 +11,13 @@ export const selectRewards = (state: AppState) => state.rewards;
 const getTotalSum = (data: RewardEntity[]) =>
   data.reduce((total: number, el) => total + +el.rewardCount, 0);
 
-export const selectAllRewards = createSelector(selectRewards, (rewards) => rewards.all);
-export const selectMyRewards = createSelector(selectRewards, (rewards) => rewards.my);
+export const selectAllRewards = createSelector(selectRewards, (rewards) => rewards.data);
 export const selectRewardsLoading = createSelector(selectRewards, (rewards) => rewards.loading);
-export const selectTotalMyRewards = createSelector(selectRewards, (rewards) =>
-  getTotalSum(rewards.my)
-);
 export const selectTotalGiveRewards = createSelector(
   selectRewards,
   selectProfileData,
   (rewards: RewardsStore, profile: UserEntity) => {
-    const giveRewards = rewards.all.filter((el: RewardEntity) => el.userBy.id === profile.id);
+    const giveRewards = rewards.data.filter((el: RewardEntity) => el.userBy.id === profile.id);
     return getTotalSum(giveRewards);
   }
 );
