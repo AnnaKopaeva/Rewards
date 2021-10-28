@@ -11,7 +11,7 @@
 ### General info
 This project is a simple peer rewards application that allows employees to receive and assign awards.
 
-### Demo 🚀
+### Demo
 https://annakopaeva.github.io/rewards/
 
 ### Technologies
