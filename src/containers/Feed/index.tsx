@@ -17,12 +17,10 @@ import { selectProfileData } from "../../store/profile/selectors";
 import ListRewards from "../ListRewards";
 
 import styles from "./Feed.styles";
+import RewardModal from "../RewardModal";
+import useToggleModal from "../../hooks/useToggleModal";
 
-interface FeedProps {
-  onOpen(): void;
-}
-
-const Feed: React.FC<FeedProps> = ({ onOpen }) => {
+const Feed: React.FC = () => {
   const dispatch = useDispatch();
 
   const profile = useSelector(selectProfileData);
@@ -46,9 +44,10 @@ const Feed: React.FC<FeedProps> = ({ onOpen }) => {
           <ListRewards data={myRewards} />
         </Tab>
       </Tabs>
-      <Button sx={styles.addBtn} onClick={onOpen}>
+      <Button sx={styles.addBtn} onClick={handleOpenModal}>
         <Add />
       </Button>
+      <RewardModal open={open} onClose={handleCloseModal} />
     </Box>
   );
 };
