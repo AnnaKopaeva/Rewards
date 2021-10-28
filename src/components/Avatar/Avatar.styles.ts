@@ -7,7 +7,7 @@ const styles = (size: SIZE) => ({
   },
   icon: {
     color: "grey.A400",
-    ...(size === SIZE.s ? { fontSize: "20px" } : { fontSize: "40px" }),
+    ...(size === SIZE.s ? { fontSize: "1.25rem" } : { fontSize: "2.5rem" }),
   },
 });
 
